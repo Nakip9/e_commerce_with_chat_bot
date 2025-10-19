@@ -1,6 +1,7 @@
 """Django settings for the AutoDrive project."""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,3 +89,26 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+OPENROUTER_API_KEY = os.environ.get(
+    "OPENROUTER_API_KEY",
+    "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",
+)
+OPENROUTER_BASE_URL = os.environ.get(
+    "OPENROUTER_BASE_URL",
+    "https://openrouter.ai/api/v1",
+)
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini")
+OPENROUTER_TEMPERATURE = float(os.environ.get("OPENROUTER_TEMPERATURE", "0.7"))
+OPENROUTER_MAX_TOKENS = int(os.environ.get("OPENROUTER_MAX_TOKENS", "512"))
+OPENROUTER_TIMEOUT = float(os.environ.get("OPENROUTER_TIMEOUT", "20"))
+OPENROUTER_SITE_URL = os.environ.get("OPENROUTER_SITE_URL", "https://autodrive-market.local")
+OPENROUTER_APP_NAME = os.environ.get("OPENROUTER_APP_NAME", "AutoDrive Chatbot")
+OPENROUTER_SYSTEM_PROMPT = os.environ.get(
+    "OPENROUTER_SYSTEM_PROMPT",
+    (
+        "أنت مساعد مبيعات سيارات لدى AutoDrive. تحدث دائمًا باللغة العربية الفصحى "
+        "وقدم إجابات مركزة حول سياراتنا، الأسعار، وخدمات ما بعد البيع، مع الحفاظ على ردود موجزة وواضحة."
+    ),
+)
