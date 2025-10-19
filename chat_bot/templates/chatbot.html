@@ -123,14 +123,17 @@
     <br><br>
     <br><br>
   </div>
-  <form class="message-form">
+  <form class="message-form" {% if not user.is_authenticated %}data-disabled="true"{% endif %}>
     {%csrf_token%}
     <div class="input-group">
-      <input type="text" class="form-control message-input" placeholder="Type your message...">
+      <input type="text" class="form-control message-input" placeholder="Type your message..." {% if not user.is_authenticated %}disabled{% endif %}>
       <div class="input-group-append">
-        <button type="submit" class="btn btn-primary btn-send">Send</button>
+        <button type="submit" class="btn btn-primary btn-send" {% if not user.is_authenticated %}disabled{% endif %}>Send</button>
       </div>
     </div>
+    {% if not user.is_authenticated %}
+    <small class="text-muted">Please sign in to start chatting.</small>
+    {% endif %}
   </form>
 </div>
 
@@ -139,7 +142,11 @@
   const messageForm = document.querySelector('.message-form');
   const messageInput = document.querySelector('.message-input');
 
-  messageForm.addEventListener('submit', (event) => {
+  if (messageForm.dataset.disabled === 'true') {
+    messageInput.placeholder = 'Sign in to chat with the assistant.';
+    messageForm.addEventListener('submit', (event) => event.preventDefault());
+  } else {
+    messageForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const message = messageInput.value.trim();
@@ -170,7 +177,12 @@
         'message': message
       })
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => { throw data; });
+        }
+        return response.json();
+      })
       .then(data => {
         const response = data.response;
         const messageItem = document.createElement('li');
@@ -186,8 +198,25 @@
         </div>
           `;
         messagesList.appendChild(messageItem);
+      })
+      .catch(error => {
+        const messageItem = document.createElement('li');
+        messageItem.classList.add('message', 'received');
+        const errorText = error && error.error ? error.error : 'We could not process your request right now.';
+        messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content text-danger">
+                ${errorText}
+            </div>
+        </div>
+          `;
+        messagesList.appendChild(messageItem);
       });
-  });
+    });
+  }
 
 </script>
 {% endblock %}
