@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-en="{{ copy.site_title.en }}" data-lang-ar="{{ copy.site_title.ar }}">{{ copy.site_title.en }}</title>
+    <link rel="stylesheet" href="{% static 'market/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body dir="ltr">
+    <header class="top-bar">
+        <div class="brand" data-lang-en="{{ copy.brand.en }}" data-lang-ar="{{ copy.brand.ar }}">{{ copy.brand.en }}</div>
+        <nav>
+            <button class="lang-switch active" data-lang="en">English</button>
+            <button class="lang-switch" data-lang="ar">العربية</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <h1 data-lang-en="{{ copy.hero.title.en }}" data-lang-ar="{{ copy.hero.title.ar }}">{{ copy.hero.title.en }}</h1>
+                <p data-lang-en="{{ copy.hero.subtitle.en }}" data-lang-ar="{{ copy.hero.subtitle.ar }}">{{ copy.hero.subtitle.en }}</p>
+                <a class="cta" href="#inventory" data-lang-en="{{ copy.hero.cta.en }}" data-lang-ar="{{ copy.hero.cta.ar }}">{{ copy.hero.cta.en }}</a>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="sun"></div>
+                <div class="car"></div>
+            </div>
+        </section>
+
+        <section id="inventory" class="inventory">
+            <h2 data-lang-en="{{ copy.inventory.title.en }}" data-lang-ar="{{ copy.inventory.title.ar }}">{{ copy.inventory.title.en }}</h2>
+            <div class="card-grid">
+                {% for car in cars %}
+                <article class="car-card">
+                    <img src="{{ car.image_url }}" alt="{{ car.name_en }}" loading="lazy">
+                    <h3 data-lang-en="{{ car.name_en }}" data-lang-ar="{{ car.name_ar }}">{{ car.name_en }}</h3>
+                    <p class="price" data-lang-en="{{ car.price_en }}" data-lang-ar="{{ car.price_ar }}">{{ car.price_en }}</p>
+                    <ul>
+                        <li data-lang-en="{{ car.feature_one_en }}" data-lang-ar="{{ car.feature_one_ar }}">{{ car.feature_one_en }}</li>
+                        <li data-lang-en="{{ car.feature_two_en }}" data-lang-ar="{{ car.feature_two_ar }}">{{ car.feature_two_en }}</li>
+                        <li data-lang-en="{{ car.feature_three_en }}" data-lang-ar="{{ car.feature_three_ar }}">{{ car.feature_three_en }}</li>
+                    </ul>
+                    <button class="primary" data-lang-en="{{ copy.inventory.book_test_drive.en }}" data-lang-ar="{{ copy.inventory.book_test_drive.ar }}">{{ copy.inventory.book_test_drive.en }}</button>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="services">
+            <h2 data-lang-en="{{ copy.services.title.en }}" data-lang-ar="{{ copy.services.title.ar }}">{{ copy.services.title.en }}</h2>
+            <div class="service-grid">
+                {% for service in copy.services.items %}
+                <article>
+                    <h3 data-lang-en="{{ service.title.en }}" data-lang-ar="{{ service.title.ar }}">{{ service.title.en }}</h3>
+                    <p data-lang-en="{{ service.text.en }}" data-lang-ar="{{ service.text.ar }}">{{ service.text.en }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="contact-text">
+                <h2 data-lang-en="{{ copy.contact.title.en }}" data-lang-ar="{{ copy.contact.title.ar }}">{{ copy.contact.title.en }}</h2>
+                <p data-lang-en="{{ copy.contact.subtitle.en }}" data-lang-ar="{{ copy.contact.subtitle.ar }}">{{ copy.contact.subtitle.en }}</p>
+            </div>
+            <form class="contact-form">
+                <label>
+                    <span data-lang-en="{{ copy.form.name_label.en }}" data-lang-ar="{{ copy.form.name_label.ar }}">{{ copy.form.name_label.en }}</span>
+                    <input type="text" name="name" placeholder="{{ copy.form.name_placeholder.en }}" data-placeholder-en="{{ copy.form.name_placeholder.en }}" data-placeholder-ar="{{ copy.form.name_placeholder.ar }}" required>
+                </label>
+                <label>
+                    <span data-lang-en="{{ copy.form.phone_label.en }}" data-lang-ar="{{ copy.form.phone_label.ar }}">{{ copy.form.phone_label.en }}</span>
+                    <input type="tel" name="phone" placeholder="{{ copy.form.phone_placeholder.en }}" data-placeholder-en="{{ copy.form.phone_placeholder.en }}" data-placeholder-ar="{{ copy.form.phone_placeholder.ar }}" required>
+                </label>
+                <label>
+                    <span data-lang-en="{{ copy.form.model_label.en }}" data-lang-ar="{{ copy.form.model_label.ar }}">{{ copy.form.model_label.en }}</span>
+                    <select name="model">
+                        {% for car in cars %}
+                        <option value="{{ car.slug }}" data-lang-en="{{ car.name_en }}" data-lang-ar="{{ car.name_ar }}">{{ car.name_en }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label>
+                    <span data-lang-en="{{ copy.form.message_label.en }}" data-lang-ar="{{ copy.form.message_label.ar }}">{{ copy.form.message_label.en }}</span>
+                    <textarea name="message" rows="4" placeholder="{{ copy.form.message_placeholder.en }}" data-placeholder-en="{{ copy.form.message_placeholder.en }}" data-placeholder-ar="{{ copy.form.message_placeholder.ar }}"></textarea>
+                </label>
+                <button type="submit" class="primary" data-lang-en="{{ copy.form.submit.en }}" data-lang-ar="{{ copy.form.submit.ar }}">{{ copy.form.submit.en }}</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p data-lang-en="{{ copy.footer.text.en }}" data-lang-ar="{{ copy.footer.text.ar }}">{{ copy.footer.text.en }}</p>
+        <div class="footer-links">
+            <a href="#inventory" data-lang-en="{{ copy.footer.inventory.en }}" data-lang-ar="{{ copy.footer.inventory.ar }}">{{ copy.footer.inventory.en }}</a>
+            <a href="#contact" data-lang-en="{{ copy.footer.contact.en }}" data-lang-ar="{{ copy.footer.contact.ar }}">{{ copy.footer.contact.en }}</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'market/script.js' %}"></script>
+</body>
+</html>

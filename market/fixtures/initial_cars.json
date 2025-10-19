@@ -1,0 +1,56 @@
+[
+  {
+    "model": "market.car",
+    "pk": 1,
+    "fields": {
+      "slug": "cityline-sedan",
+      "name_en": "CityLine Sedan 2023",
+      "name_ar": "سيدان سيتي لاين 2023",
+      "price_en": "$28,500",
+      "price_ar": "٢٨٬٥٠٠ دولار",
+      "feature_one_en": "1.5L turbo engine",
+      "feature_one_ar": "محرك تيربو سعة 1.5 لتر",
+      "feature_two_en": "Adaptive cruise control",
+      "feature_two_ar": "مثبت سرعة ذكي",
+      "feature_three_en": "Panoramic roof",
+      "feature_three_ar": "سقف بانورامي",
+      "image_url": "https://images.unsplash.com/photo-1549921296-3e85d1ce9f44?auto=format&fit=crop&w=800&q=80"
+    }
+  },
+  {
+    "model": "market.car",
+    "pk": 2,
+    "fields": {
+      "slug": "trailmaster-suv",
+      "name_en": "TrailMaster SUV 4x4",
+      "name_ar": "دفع رباعي تريل ماستر",
+      "price_en": "$44,900",
+      "price_ar": "٤٤٬٩٠٠ دولار",
+      "feature_one_en": "3.0L V6 power",
+      "feature_one_ar": "محرك V6 سعة 3.0 لتر",
+      "feature_two_en": "360° camera system",
+      "feature_two_ar": "نظام كاميرات بزاوية 360°",
+      "feature_three_en": "Leather interior",
+      "feature_three_ar": "مقصورة جلدية",
+      "image_url": "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80"
+    }
+  },
+  {
+    "model": "market.car",
+    "pk": 3,
+    "fields": {
+      "slug": "voltx-hatch",
+      "name_en": "VoltX Electric Hatch",
+      "name_ar": "فولت إكس الكهربائية",
+      "price_en": "$35,200",
+      "price_ar": "٣٥٬٢٠٠ دولار",
+      "feature_one_en": "400 km range",
+      "feature_one_ar": "مدى 400 كم",
+      "feature_two_en": "Fast charging 30 min",
+      "feature_two_ar": "شحن سريع خلال 30 دقيقة",
+      "feature_three_en": "Advanced driver assist",
+      "feature_three_ar": "مساعدة قيادة متقدمة",
+      "image_url": "https://images.unsplash.com/photo-1511391409810-388e94c41f6c?auto=format&fit=crop&w=800&q=80"
+    }
+  }
+]
