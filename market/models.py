@@ -22,3 +22,12 @@ class Car(models.Model):
 
     def __str__(self) -> str:  # pragma: no cover - human-readable representation
         return self.name_en
+# the form models
+class ContactForm(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    model = models.CharField(max_length=100)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

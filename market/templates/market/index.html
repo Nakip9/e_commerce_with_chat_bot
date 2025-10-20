@@ -68,29 +68,57 @@
                 <h2 data-lang-en="{{ copy.contact.title.en }}" data-lang-ar="{{ copy.contact.title.ar }}">{{ copy.contact.title.en }}</h2>
                 <p data-lang-en="{{ copy.contact.subtitle.en }}" data-lang-ar="{{ copy.contact.subtitle.ar }}">{{ copy.contact.subtitle.en }}</p>
             </div>
-            <form class="contact-form">
-                <label>
-                    <span data-lang-en="{{ copy.form.name_label.en }}" data-lang-ar="{{ copy.form.name_label.ar }}">{{ copy.form.name_label.en }}</span>
-                    <input type="text" name="name" placeholder="{{ copy.form.name_placeholder.en }}" data-placeholder-en="{{ copy.form.name_placeholder.en }}" data-placeholder-ar="{{ copy.form.name_placeholder.ar }}" required>
-                </label>
-                <label>
-                    <span data-lang-en="{{ copy.form.phone_label.en }}" data-lang-ar="{{ copy.form.phone_label.ar }}">{{ copy.form.phone_label.en }}</span>
-                    <input type="tel" name="phone" placeholder="{{ copy.form.phone_placeholder.en }}" data-placeholder-en="{{ copy.form.phone_placeholder.en }}" data-placeholder-ar="{{ copy.form.phone_placeholder.ar }}" required>
-                </label>
-                <label>
-                    <span data-lang-en="{{ copy.form.model_label.en }}" data-lang-ar="{{ copy.form.model_label.ar }}">{{ copy.form.model_label.en }}</span>
-                    <select name="model">
-                        {% for car in cars %}
-                        <option value="{{ car.slug }}" data-lang-en="{{ car.name_en }}" data-lang-ar="{{ car.name_ar }}">{{ car.name_en }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-                <label>
-                    <span data-lang-en="{{ copy.form.message_label.en }}" data-lang-ar="{{ copy.form.message_label.ar }}">{{ copy.form.message_label.en }}</span>
-                    <textarea name="message" rows="4" placeholder="{{ copy.form.message_placeholder.en }}" data-placeholder-en="{{ copy.form.message_placeholder.en }}" data-placeholder-ar="{{ copy.form.message_placeholder.ar }}"></textarea>
-                </label>
-                <button type="submit" class="primary" data-lang-en="{{ copy.form.submit.en }}" data-lang-ar="{{ copy.form.submit.ar }}">{{ copy.form.submit.en }}</button>
-            </form>
+
+<form class="contact-form" method="POST">
+    {% csrf_token %}
+    
+    <!-- Display form errors -->
+    <div class="form-errors">
+        {% if form.errors %}
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Name Field -->
+    <label>
+        <span>{{ copy.form.name_label.en }}</span>
+        {{ form.name }}
+    </label>
+
+    <!-- Phone Field -->
+    <label>
+        <span>{{ copy.form.phone_label.en }}</span>
+        {{ form.phone }}
+    </label>
+
+    <!-- Model Selection Field (Dropdown of cars) -->
+    <label>
+        <span>{{ copy.form.model_label.en }}</span>
+        <select name="model">
+            {% for car in cars %}
+                <option value="{{ car.slug }}" data-lang-en="{{ car.name_en }}" data-lang-ar="{{ car.name_ar }}">
+                    {{ car.name_en }}
+                </option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <!-- Message Field -->
+    <label>
+        <span>{{ copy.form.message_label.en }}</span>
+        <textarea name="message" rows="4" placeholder="{{ copy.form.message_placeholder.en }}"></textarea>
+    </label>
+
+    <!-- Submit Button -->
+    <button type="submit" class="primary">{{ copy.form.submit.en }}</button>
+</form>
+
         </section>
     </main>
 
@@ -101,6 +129,8 @@
             <a href="#contact" data-lang-en="{{ copy.footer.contact.en }}" data-lang-ar="{{ copy.footer.contact.ar }}">{{ copy.footer.contact.en }}</a>
         </div>
     </footer>
+
+    <a href="{% url 'home' %}" class="button">Go to Home</a>
 
     <script src="{% static 'market/script.js' %}"></script>
 </body>

@@ -58,7 +58,7 @@ def build_copy() -> dict[str, object]:
             "name_label": {"en": "Full name", "ar": "الاسم الكامل"},
             "name_placeholder": {"en": "Alex Driver", "ar": "أحمد السائق"},
             "phone_label": {"en": "Phone number", "ar": "رقم الهاتف"},
-            "phone_placeholder": {"en": "+1 555 0100", "ar": "+966 555 0100"},
+            "phone_placeholder": {"en": "+1 555 0100", "ar": "+967 777 777 777"},
             "model_label": {"en": "Preferred model", "ar": "الموديل المفضل"},
             "message_label": {"en": "Message", "ar": "الرسالة"},
             "message_placeholder": {

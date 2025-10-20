@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import Car
+from .models import Car,ContactForm
 
 
+admin.site.register(ContactForm)
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ("name_en", "name_ar", "price_en")
